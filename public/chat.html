@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <button class="navbar-toggler mr-auto" type="button" id="sidebarToggler">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand brand" id="room">Room</a>
+
+    <form class="form-inline ml-auto">
+      <button type="button" id="quit" class="btn btn-danger active" data-toggle="modal"
+        data-target="#leaveModal">&times;</button>
+    </form>
+  </nav>
+
+  <section class="chat">
+    <aside id="sidebar" class="sidebar" role="navigation">
+      <ul class="nav flex-column">
+        <li class="nav-item userInfo">
+          Users
+        </li>
+        <ul class="userList" id="userList"></ul>
+      </ul>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="content" id="content">
+      <div id="messages" class="messageBox"></div>
+
+      <div class="bottomBox">
+        <input type="text" class="form-control" id="message" placeholder="Type a message..." required autofocus
+          autocomplete="off">
+        <button class="btn" id="sendMessageBtn"><img src="https://img.icons8.com/small/32/000000/filled-sent.png"
+            alt="Send" width="30px" height="30px" title="Send Message" /></button>
+        <button class="btn" id="sendLocationBtn"><img src="/img/location.png" alt="location" width="30px" height="30px"
+            title="Share Location"></button>
+      </div>
+    </div>
+  </section>
+
+
+  <script id="messageTemplete" type="text/html">
+    <div class="message">
+      <p>
+        <span class="senderName">{{username}}</span>
+        <span class="meta">{{createAt}}</span>
+      </p>
+      <p>{{message}}</p>
+    </div>
+  </script>
+
+  <script id="locationTemplete" type="text/html">
+    <div class="message">
+      <p>
+        <span class="senderName">{{username}}</span>
+        <span class="meta">{{createAt}}</span>
+      </p>
+      <p>
+        <a href="{{url}}" target="_blank">
+          <iframe width="280" height="280" src="{{url}}&z=10&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </a>
+      </p>
+    </div>
+  </script>
+
+  <script id="userListTemplete" type="text/html">
+      {{#users}}
+        <li>{{username}}</li>
+      {{/users}}
+  </script>
+
+  <div class="modal fade" id="leaveModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Leave Room</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <h6>Are u sure want to leave this room?</h6>
+        </div>
+        <div class="modal-footer">
+          <a type="button" href="/" class="btn btn-danger">Leave</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade show" id="userModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">User is in Room</h4>
+          <a type="button" href="#" class="close">&times;</a>
+        </div>
+
+        <div class="modal-body">
+          <h6>Username is in use! Please try another username.</h6>
+        </div>
+        <div class="modal-footer">
+          <a type="button" href="#" class="btn btn-danger">Ok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/mustache.min.js"></script>
+  <script src="/js/moment.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+
+</html>

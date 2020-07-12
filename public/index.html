@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join | Chat App</title>
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body class="bg-dark">
+  <div class="container-fluid centeredBox">
+    <div class="row text-light text-center">
+      <div class="col-sm-4 col-lg-3 mx-auto">
+        <h1 class="heading">Join</h1>
+        <form action="/chat.html">
+          <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Display name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="room" placeholder="Room" required>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg">Join</button>
+        </form>
+        <a class="text-white float-right text-decoration-none mt-4" href="http://dipvachhani.tech/">
+          © Dip Vachhani</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/jquery.min.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const room = urlParams.get("room");
+    if (room) {
+      $('[name="room"]').val(room)
+    }
+  </script>
+
+</body>
+
+</html>
